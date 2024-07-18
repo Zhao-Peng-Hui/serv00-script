@@ -41,7 +41,7 @@ for server in servers:
         output = subprocess.check_output(restore_command, shell=True, stderr=subprocess.STDOUT)
         if "online" in output:
             print(f"服务存活")
-        else
+        else:
             print(f"服务死亡")
         summary_message += f"\n成功恢复 {host} 上的 vless 服务：\n{output.decode('utf-8')}"
         print(f"{summary_message}")
