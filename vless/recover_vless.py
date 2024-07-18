@@ -32,17 +32,13 @@ for server in servers:
     username = server['username']
     password = server['password']
     #cron_command = server.get('cron', default_restore_command)
-    cron_command = "~/.npm-global/bin/pm2 status | grep online"
+    cron_command = "/bin/sh /home/Zq335435768/domains/vless/check.sh"
     print(f"连接到 {host}...执行命令：{cron_command}")
 
     # 执行恢复命令（这里假设使用 SSH 连接和密码认证）
     restore_command = f"sshpass -p '{password}' ssh -o StrictHostKeyChecking=no -p {port} {username}@{host} '{cron_command}'"
     try:
         output = subprocess.check_output(restore_command, shell=True, stderr=subprocess.STDOUT)
-        if "online" in output:
-            print(f"服务存活")
-        else:
-            print(f"服务死亡")
         summary_message += f"\n成功恢复 {host} 上的 vless 服务：\n{output.decode('utf-8')}"
         print(f"{summary_message}")
     except subprocess.CalledProcessError as e:
