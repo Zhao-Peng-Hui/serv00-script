@@ -39,6 +39,10 @@ for server in servers:
     restore_command = f"sshpass -p '{password}' ssh -o StrictHostKeyChecking=no -p {port} {username}@{host} '{cron_command}'"
     try:
         output = subprocess.check_output(restore_command, shell=True, stderr=subprocess.STDOUT)
+        if "online" in output:
+            print(f"服务存活")
+        else
+            print(f"服务死亡")
         summary_message += f"\n成功恢复 {host} 上的 vless 服务：\n{output.decode('utf-8')}"
         print(f"{summary_message}")
     except subprocess.CalledProcessError as e:
