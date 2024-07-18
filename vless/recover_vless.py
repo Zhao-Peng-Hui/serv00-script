@@ -32,7 +32,7 @@ for server in servers:
     username = server['username']
     password = server['password']
     #cron_command = server.get('cron', default_restore_command)
-    cron_command = "pm2 status | grep online"
+    cron_command = "~/.npm-global/bin/pm2 status | grep online"
     print(f"连接到 {host}...执行命令：{cron_command}")
 
     # 执行恢复命令（这里假设使用 SSH 连接和密码认证）
